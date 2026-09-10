@@ -1,35 +1,31 @@
-# Uzay Ucusunun Fare Karacigerinde Gen Ifadesi Varyansi Uzerindeki Etkisi
+# Uzay Uçuşunun Fare Karaciğerinde Gen İfadesi Varyansı Üzerindeki Etkisi
 
-TUBITAK 2204-A Lise Ogrencileri Arastirma Projeleri Yarismasi kapsaminda hazirlanmistir.
+TÜBİTAK 2204-A Lise Öğrencileri Araştırma Projeleri Yarışması kapsamında hazırlanmıştır.
 
-## Ne yapiyor bu kod?
+## Bu kod ne yapıyor?
 
-NASA GeneLab'den alinan RNA-seq verisinde (OSD-379, RR-8/RRRM-1 gorevi, fare karacigeri),
-uzay ucusunun (FLT) gen ifadesi varyansini yer kontrolune (GC) kiyasla artirip artirmadigini
-test eder.
+NASA GeneLab'den alınan RNA-seq verisinde (OSD-379, RR-8/RRRM-1 görevi, fare karaciğeri), uzay uçuşunun (FLT) gen ifadesi varyansını yer kontrolüne (GC) kıyasla artırıp artırmadığını test eder.
 
-## Yontem
+## Yöntem
 
-1. Dusuk ifadeli genler filtrelenir (ortalama < 10 okuma)
-2. Veri log2(x+1) donusumune tabi tutulur
-3. Her gen icin Levene testi (medyan-merkezli) ile varyans farki test edilir
-4. Genom-capi toplu etki, 10.000 tekrarli bir permutasyon testiyle degerlendirilir
-5. Benjamini-Hochberg (FDR) duzeltmesi uygulanir
+1. Düşük ifadeli genler filtrelenir (ortalama < 10 okuma)
+2. Veri log2(x+1) dönüşümüne tabi tutulur
+3. Her gen için Levene testi (medyan merkezli) ile varyans farkı test edilir
+4. Genom çapı toplu etki, 10.000 tekrarlı bir permütasyon testiyle değerlendirilir
+5. Benjamini-Hochberg (FDR) düzeltmesi uygulanır
 
-## Nasil calistirilir?
+## Nasıl çalıştırılır?
 
-1. GLDS-379_rna_seq_Normalized_Counts_rRNArm_GLbulkRNAseq.csv dosyasini
-   NASA OSDR'den indirin: https://osdr.nasa.gov/bio/repo/data/studies/OSD-379
-2. Dosyayi bu script ile ayni klasore koyun
+1. `GLDS-379_rna_seq_Normalized_Counts_rRNArm_GLbulkRNAseq.csv` dosyasını NASA OSDR'den indirin: https://osdr.nasa.gov/bio/repo/data/studies/OSD-379
+2. Dosyayı bu script ile aynı klasöre koyun
 3. `pip install pandas numpy scipy statsmodels`
 4. `python variance_analysis.py`
 
-## Veri kaynagi
+## Veri kaynağı
 
 NASA GeneLab Open Science Data Repository, OSD-379 (GLDS-379):
 https://osdr.nasa.gov/bio/repo/data/studies/OSD-379
 
 ## Lisans
 
-Bu kod acik erisimlidir, TUBITAK 2204-A proje raporunun tekrarlanabilirligini
-desteklemek amaciyla paylasilmistir.
+Bu kod, TÜBİTAK 2204-A proje raporunun tekrarlanabilirliğini desteklemek amacıyla açık erişime sunulmuştur.
