@@ -26,6 +26,15 @@ NASA GeneLab'den alınan RNA-seq verisinde (OSD-379, RR-8/RRRM-1 görevi, fare k
 NASA GeneLab Open Science Data Repository, OSD-379 (GLDS-379):
 https://osdr.nasa.gov/bio/repo/data/studies/OSD-379
 
+
+## GSEA (gen seti zenginleştirme analizi)
+
+`gsea_analysis.py`, tekil gen anlamlılığı FDR düzeltmesiyle kaybolduğu için, tamamlayıcı bir gen seti düzeyinde analiz çalıştırır. Kullanılan gen seti dosyası (GO Biyolojik Süreç, fare, Ensembl ID) şu adresten indirilebilir:
+
+https://raw.githubusercontent.com/ELTEbioinformatics/GMT_files_for_mulea/main/GMT_files/Mus_musculus_10090/GO_BP_Mus_musculus_EnsemblID.gmt
+
+Çalıştırmadan önce: `pip install gseapy`
+
 ## Lisans
 
 Bu kod, TÜBİTAK 2204-A proje raporunun tekrarlanabilirliğini desteklemek amacıyla açık erişime sunulmuştur.
