@@ -5,12 +5,36 @@ FLT vs GC karsilastirmasi icin, GO Biyolojik Surec kategorilerine karsi.
 Kullanilan gen seti veritabani:
 ELTEbioinformatics/GMT_files_for_mulea (GO_BP_Mus_musculus_EnsemblID.gmt)
 https://github.com/ELTEbioinformatics/GMT_files_for_mulea
+
+NOT: Bu script, indirilen GMT dosyasindaki Ensembl ID versiyon eklerini
+(orn. ENSMUSG00000089798.1 -> ENSMUSG00000089798) otomatik olarak temizler;
+ayri bir on-isleme adimi gerekmez.
 """
 import gseapy as gp
 import pandas as pd
 import numpy as np
 import re
 
+# ---------- 1) Gen seti (GMT) dosyasini temizle ----------
+RAW_GMT = 'GO_BP_Mus_musculus_EnsemblID.gmt'
+CLEAN_GMT = 'GO_BP_Mus_musculus_EnsemblID_clean.gmt'
+
+with open(RAW_GMT, encoding='utf-8') as f:
+    lines = f.readlines()
+
+cleaned_lines = []
+for line in lines:
+    if line.startswith('#') or not line.strip():
+        continue
+    line = re.sub(r'(ENSMUSG\d+)\.\d+', r'\1', line)
+    cleaned_lines.append(line)
+
+with open(CLEAN_GMT, 'w', encoding='utf-8') as f:
+    f.writelines(cleaned_lines)
+
+print(f"Gen seti temizlendi: {len(cleaned_lines)} kategori ({CLEAN_GMT} olarak kaydedildi)")
+
+# ---------- 2) Ekspresyon verisini yukle ve sirali gen listesini olustur ----------
 df = pd.read_csv('GLDS-379_rna_seq_Normalized_Counts_rRNArm_GLbulkRNAseq.csv')
 df = df.rename(columns={df.columns[0]: 'gene_id'}).set_index('gene_id')
 
@@ -43,9 +67,10 @@ log_var_ratio = np.log2((var_A + eps) / (var_B + eps))
 rank_df = pd.DataFrame({'gene': df_filt.index.astype(str), 'score': log_var_ratio})
 rank_df = rank_df.dropna().sort_values('score', ascending=False).reset_index(drop=True)
 
+# ---------- 3) GSEA (on-sirali) ----------
 pre_res = gp.prerank(
     rnk=rank_df,
-    gene_sets='GO_BP_Mus_musculus_EnsemblID_clean.gmt',
+    gene_sets=CLEAN_GMT,
     min_size=15,
     max_size=500,
     permutation_num=1000,

@@ -29,11 +29,14 @@ https://osdr.nasa.gov/bio/repo/data/studies/OSD-379
 
 ## GSEA (gen seti zenginleştirme analizi)
 
-`gsea_analysis.py`, tekil gen anlamlılığı FDR düzeltmesiyle kaybolduğu için, tamamlayıcı bir gen seti düzeyinde analiz çalıştırır. Kullanılan gen seti dosyası (GO Biyolojik Süreç, fare, Ensembl ID) şu adresten indirilebilir:
+`gsea_analysis.py`, tekil gen anlamlılığı FDR düzeltmesiyle kaybolduğu için, tamamlayıcı bir gen seti düzeyinde analiz çalıştırır. Script, gen seti dosyasındaki Ensembl ID versiyon eklerini otomatik temizler; ayrı bir ön-işleme adımı gerekmez.
+
+1. Gen seti dosyasını (GO Biyolojik Süreç, fare, Ensembl ID) indirin ve bu script ile aynı klasöre koyun (dosya adını değiştirmeyin):
 
 https://raw.githubusercontent.com/ELTEbioinformatics/GMT_files_for_mulea/main/GMT_files/Mus_musculus_10090/GO_BP_Mus_musculus_EnsemblID.gmt
 
-Çalıştırmadan önce: `pip install gseapy`
+2. Çalıştırmadan önce: `pip install gseapy`
+3. `python gsea_analysis.py`
 
 ## Lisans
 
